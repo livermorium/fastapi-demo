@@ -24,7 +24,7 @@
 * The same as when declaring query parameters, when a model attribute has a default value, it is not required. Otherwise, it is required. Use None to make it just optional.
 * FastAPI will recognize that the function parameters that match path parameters should be taken from the path, and that function parameters that are declared to be Pydantic models should be taken from the request body.
 
-## Query Parameters and String Validations¶
+## Query Parameters and String Validations
 
 * Query(None, min_length=3, max_length=50, regex="^fixedquery$")
 * Query(..., min_length=3)
@@ -33,3 +33,11 @@
   * async def read_items(q: Optional[List[str]] = Query(None)):
 * alias: not valid python var
 * deprecated
+* title
+* description
+* ...: no default value, required
+
+## Path Parameters and Numeric Validations
+* The same way you can declare more validations and metadata for query parameters with Query, you can declare the same type of validations and metadata for path parameters with Path.
+* add * in parameter -> parameter with key-value: Order the parameters as you need, tricks
+* Number validations: ge, gt, le, lt
