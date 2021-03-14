@@ -1,7 +1,7 @@
 from typing import Optional
 from enum import Enum
 
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Body
 from pydantic import BaseModel
 
 
@@ -12,6 +12,11 @@ class Item(BaseModel):
     name: str
     price: float
     is_offer: Optional[bool] = None
+
+
+class User(BaseModel):
+    username: str
+    full_name: Optional[str] = None
 
 
 class ModelName(str, Enum):
@@ -75,3 +80,58 @@ def get_model(model_name: ModelName):
         return {"model_name": model_name, "message": "LeCNN all the images"}
 
     return {"model_name": model_name, "message": "Have some residuals"}
+
+
+@app.put("/items/{item_id}/2")
+async def update_item2(item_id: int, item: Item = Body(..., embed=True)):
+    """
+    {
+        "item": {
+            "name": "Foo",
+            "description": "The pretender",
+            "price": 42.0,
+            "tax": 3.2
+        }
+    }
+
+    instead of
+
+    {
+        "name": "Foo",
+        "description": "The pretender",
+        "price": 42.0,
+        "tax": 3.2
+    }
+    """
+    results = {"item_id": item_id, "item": item}
+    return results
+
+
+@app.put("/items/{item_id}/1")
+async def update_item1(
+    *,
+    item_id: int,
+    item: Item,
+    user: User,
+    importance: int = Body(..., gt=0),
+    q: Optional[str] = None
+):
+    """
+    {
+        "item": {
+            "name": "Foo",
+            "description": "The pretender",
+            "price": 42.0,
+            "tax": 3.2
+        },
+        "user": {
+            "username": "dave",
+            "full_name": "Dave Grohl"
+        },
+        "importance": 5
+    }
+    """
+    results = {"item_id": item_id, "item": item, "user": user, "importance": importance}
+    if q:
+        results.update({"q": q})
+    return results
