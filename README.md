@@ -23,3 +23,13 @@
 ## 请求体
 * The same as when declaring query parameters, when a model attribute has a default value, it is not required. Otherwise, it is required. Use None to make it just optional.
 * FastAPI will recognize that the function parameters that match path parameters should be taken from the path, and that function parameters that are declared to be Pydantic models should be taken from the request body.
+
+## Query Parameters and String Validations¶
+
+* Query(None, min_length=3, max_length=50, regex="^fixedquery$")
+* Query(..., min_length=3)
+* LIST
+  * http://localhost:8000/items/?q=foo&q=bar
+  * async def read_items(q: Optional[List[str]] = Query(None)):
+* alias: not valid python var
+* deprecated
