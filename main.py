@@ -45,9 +45,15 @@ def read_item(item_id: int, q: Optional[str] = None):
 
 
 @app.put("/items/{item_id}")
-def update_item(item_id: int, item: Item):
-    """PUT data"""
-    return {"id": item_id, "name": item.name, "price": item.price}
+def update_item(item_id: int, item: Item, q: Optional[str] = None):
+    """put data
+    * If the parameter is also declared in the path, it will be used as a path parameter.
+    * If the parameter is of a singular type (like int, float, str, bool, etc) it will be interpreted as a query parameter.
+    * If the parameter is declared to be of the type of a Pydantic model, it will be interpreted as a request body."""
+    result = {"item_id": item_id, **item.dict()}
+    if q:
+        result.update({"q": q})
+    return result
 
 
 @app.get("/models/{model_name}")

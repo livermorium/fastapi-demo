@@ -19,3 +19,7 @@
 ## 查询参数
 
 声明不属于路径参数的其他函数参数时，它们将被自动解释为"查询字符串"参数
+
+## 请求体
+* The same as when declaring query parameters, when a model attribute has a default value, it is not required. Otherwise, it is required. Use None to make it just optional.
+* FastAPI will recognize that the function parameters that match path parameters should be taken from the path, and that function parameters that are declared to be Pydantic models should be taken from the request body.
