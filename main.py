@@ -16,6 +16,7 @@ class Item(BaseModel):
 
 @app.get("/")
 def read_root():
+    """/"""
     return {"hello": "world"}
 
 
@@ -26,4 +27,4 @@ def read_item(item_id: int, q: Optional[str] = None):
 
 @app.put("/items/{item_id}")
 def update_item(item_id: int, item: Item):
-    return {"id": item_id, "name": item.name}
+    return {"id": item_id, "name": item.name, "price": item.price}
