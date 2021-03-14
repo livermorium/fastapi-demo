@@ -8,6 +8,11 @@ from pydantic import BaseModel, Field
 app = FastAPI()
 
 
+class Image(BaseModel):
+    url: str
+    name: str
+
+
 class Item(BaseModel):
     name: str
     price: float = Field(
@@ -17,6 +22,7 @@ class Item(BaseModel):
         title="The price of the item",
     )
     is_offer: Optional[bool] = None
+    image: Optional[Image] = None
 
 
 class User(BaseModel):

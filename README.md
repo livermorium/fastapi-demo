@@ -47,4 +47,6 @@
 
 ## Body - Fields
 * declare validation and metadata inside of Pydantic models using Pydantic's Field
-* 
+
+## Body - Nested Models
+* Each attribute of a Pydantic model has a type. But that type can itself be another Pydantic model.
