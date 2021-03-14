@@ -1,7 +1,7 @@
 from typing import Optional
 from enum import Enum
 
-from fastapi import FastAPI, Query, Body
+from fastapi import FastAPI, Query, Body, status as Status
 from pydantic import BaseModel, Field
 
 
@@ -146,3 +146,8 @@ async def update_item1(
     if q:
         results.update({"q": q})
     return results
+
+
+@app.post("/items/", status_code=Status.HTTP_201_CREATED)
+async def create_item(name: str):
+    return

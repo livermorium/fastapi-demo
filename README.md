@@ -50,3 +50,6 @@
 
 ## Body - Nested Models
 * Each attribute of a Pydantic model has a type. But that type can itself be another Pydantic model.
+
+## status code
+* status_code=Status.HTTP_201_CREATED
