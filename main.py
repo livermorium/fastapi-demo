@@ -1,9 +1,8 @@
-from typing import Optional
+from typing import Optional, List
 from enum import Enum
 
-from fastapi import FastAPI, Query, Body, status as Status, HTTPException
+from fastapi import FastAPI, Query, Body, status as Status, HTTPException, Header
 from pydantic import BaseModel, Field
-from starlette.status import HTTP_404_NOT_FOUND
 
 
 app = FastAPI()
@@ -41,7 +40,11 @@ items = {"foo": "The Foo Wrestlers"}
 
 
 @app.get("/")
-def read_root():
+def read_root(
+    user_agent: Optional[str] = Header(None),
+    strange_header: Optional[str] = Header(None, convert_underscores=False),
+    x_token: Optional[List[str]] = Header(None),
+):
     """根路径"""
     return {"hello": "world"}
 

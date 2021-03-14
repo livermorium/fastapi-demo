@@ -57,3 +57,8 @@
 ## Handling Errors
 * To return HTTP responses with errors to the client you use HTTPException.
 
+## Header Parameters
+* Most of the standard headers are separated by a "hyphen" character, also known as the "minus symbol" (-). So, by default, Header will convert the parameter names characters from underscore (_) to hyphen (-) to extract and document the headers. If for some reason you need to disable automatic conversion of underscores to hyphens, set the parameter convert_underscores of Header to False.
+* Also, HTTP headers are case-insensitive, so, you can declare them with standard Python style (also known as "snake_case"). So, you can use user_agent as you normally would in Python code, instead of needing to capitalize the first letters as User_Agent or something similar.
+
+
