@@ -2,7 +2,7 @@ from typing import Optional
 from enum import Enum
 
 from fastapi import FastAPI, Query, Body
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 app = FastAPI()
@@ -10,7 +10,12 @@ app = FastAPI()
 
 class Item(BaseModel):
     name: str
-    price: float
+    price: float = Field(
+        ...,
+        gt=0,
+        description="The price must be greater than zero",
+        title="The price of the item",
+    )
     is_offer: Optional[bool] = None
 
 

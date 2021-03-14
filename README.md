@@ -44,3 +44,7 @@
 * use the parameter names as keys (field names) in the body: 与只有一个的声明类似，表意差别明显
 * instruct FastAPI to treat it as another body key using Body: Body
 * But if you want it to expect a JSON with a key item and inside of it the model contents, as it does when you declare extra body parameters, you can use the special Body parameter embed
+
+## Body - Fields
+* declare validation and metadata inside of Pydantic models using Pydantic's Field
+* 
