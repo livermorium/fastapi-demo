@@ -1,8 +1,9 @@
 from typing import Optional
 from enum import Enum
 
-from fastapi import FastAPI, Query, Body, status as Status
+from fastapi import FastAPI, Query, Body, status as Status, HTTPException
 from pydantic import BaseModel, Field
+from starlette.status import HTTP_404_NOT_FOUND
 
 
 app = FastAPI()
@@ -36,6 +37,9 @@ class ModelName(str, Enum):
     lenet = "lenet"
 
 
+items = {"foo": "The Foo Wrestlers"}
+
+
 @app.get("/")
 def read_root():
     """根路径"""
@@ -57,6 +61,12 @@ async def read_user_item(item_id: str, user_id: int, needy: str):
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
     """查询可选参数"""
+    if item_id not in items:
+        raise HTTPException(
+            status_code=Status.HTTP_404_NOT_FOUND,
+            detail="Item not found",
+            headers={"X-Error": "There goes my error"},
+        )
     return {"id": item_id, "q": q}
 
 

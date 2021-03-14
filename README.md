@@ -51,5 +51,9 @@
 ## Body - Nested Models
 * Each attribute of a Pydantic model has a type. But that type can itself be another Pydantic model.
 
-## status code
+## Response Status Code
 * status_code=Status.HTTP_201_CREATED
+
+## Handling Errors
+* To return HTTP responses with errors to the client you use HTTPException.
+
